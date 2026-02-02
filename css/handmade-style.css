@@ -1,0 +1,428 @@
+/* ============================================
+   手工设计风格优化 - 消除AI生成感
+   ============================================ */
+
+/* ============ 1. 全局装饰性元素 ============ */
+
+/* 手绘风格的装饰线 */
+.hand-drawn-line {
+  position: relative;
+}
+
+.hand-drawn-line::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(21, 101, 192, 0.3) 10%,
+    rgba(21, 101, 192, 0.6) 50%,
+    rgba(21, 101, 192, 0.3) 90%,
+    transparent 100%
+  );
+  bottom: -8px;
+  left: 0;
+  border-radius: 50% 50% 50% 50% / 100% 100% 0% 0%;
+  transform: scaleX(0.95);
+  opacity: 0.7;
+}
+
+/* 手绘风格的圆点装饰 */
+.hand-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: #1565c0;
+  border-radius: 50%;
+  margin-right: 12px;
+  opacity: 0.8;
+  animation: dotPulse 2s ease-in-out infinite;
+}
+
+@keyframes dotPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.5;
+  }
+}
+
+/* 不规则的装饰形状 */
+.organic-shape {
+  position: absolute;
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  animation: organicFloat 8s ease-in-out infinite;
+}
+
+@keyframes organicFloat {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate(10px, -10px) rotate(5deg);
+  }
+  50% {
+    transform: translate(-5px, 15px) rotate(-3deg);
+  }
+  75% {
+    transform: translate(-10px, -5px) rotate(3deg);
+  }
+}
+
+/* 肌理质感叠加 */
+.texture-overlay {
+  position: relative;
+}
+
+.texture-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+
+/* ============ 2. 非对称布局变量 ============ */
+
+/* 不规则的间距变量 */
+:root {
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 20px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+
+  /* 随机化偏移 */
+  --offset-random-1: 6px;
+  --offset-random-2: -4px;
+  --offset-random-3: 8px;
+  --offset-random-4: -6px;
+
+  /* 不规则圆角 */
+  --radius-organic-1: 18px 22px 16px 24px;
+  --radius-organic-2: 24px 16px 22px 18px;
+  --radius-organic-3: 20px 20px 20px 20px;
+}
+
+/* ============ 3. 自定义卡片样式 ============ */
+
+/* 手工风格卡片 */
+.hand-card {
+  background: white;
+  border: 1px solid rgba(21, 101, 192, 0.15);
+  border-radius: var(--radius-organic-1);
+  padding: var(--space-lg) var(--space-lg) var(--space-lg);
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.hand-card::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(135deg,
+    rgba(21, 101, 192, 0.1) 0%,
+    transparent 30%,
+    transparent 70%,
+    rgba(66, 165, 245, 0.1) 100%
+  );
+  border-radius: var(--radius-organic-1);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.hand-card:hover {
+  transform: translate(var(--offset-random-1), var(--offset-random-2));
+  box-shadow: 6px 12px 24px rgba(21, 101, 192, 0.12);
+  border-color: rgba(21, 101, 192, 0.3);
+}
+
+.hand-card:hover::before {
+  opacity: 1;
+}
+
+/* 错落的卡片布局 */
+.stagger-grid {
+  display: grid;
+  gap: 24px;
+}
+
+.stagger-grid > *:nth-child(3n+1) {
+  transform: translateY(var(--offset-random-1));
+}
+
+.stagger-grid > *:nth-child(3n+2) {
+  transform: translateY(var(--offset-random-2));
+}
+
+.stagger-grid > *:nth-child(3n+3) {
+  transform: translateY(var(--offset-random-3));
+}
+
+.stagger-grid > *:hover {
+  transform: translateY(0);
+}
+
+/* ============ 4. 自定义按钮样式 ============ */
+
+/* 手工风格按钮 */
+.hand-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 28px;
+  background: linear-gradient(135deg, #1565c0 0%, #1976d2 100%);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px 12px 12px 8px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.hand-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.6s ease;
+}
+
+.hand-btn:hover::before {
+  left: 100%;
+}
+
+.hand-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(21, 101, 192, 0.35);
+}
+
+.hand-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* ============ 5. 自定义标题样式 ============ */
+
+/* 手工风格标题 */
+.hand-title {
+  position: relative;
+  font-weight: 700;
+  color: #1565c0;
+  display: inline-block;
+}
+
+.hand-title::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 60%;
+  height: 3px;
+  background: linear-gradient(90deg,
+    rgba(21, 101, 192, 0.6),
+    rgba(66, 165, 245, 0.3)
+  );
+  border-radius: 2px;
+  transform: skewX(-5deg);
+}
+
+/* 标题装饰元素 */
+.hand-title-decoration {
+  position: absolute;
+  top: -10px;
+  right: -15px;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(21, 101, 192, 0.3);
+  border-radius: 50%;
+  animation: spinSlow 10s linear infinite;
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ============ 6. 标题偏移优化 ============ */
+
+.section-header {
+  text-align: left;
+  position: relative;
+  margin-bottom: var(--space-2xl);
+  padding-left: var(--space-md);
+}
+
+.section-header::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 5px;
+  bottom: 5px;
+  width: 4px;
+  background: linear-gradient(180deg,
+    rgba(21, 101, 192, 0.8) 0%,
+    rgba(66, 165, 245, 0.4) 100%
+  );
+  border-radius: 2px;
+}
+
+.section-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1565c0;
+  margin-bottom: 8px;
+  line-height: 1.3;
+  position: relative;
+}
+
+.section-subtitle {
+  font-size: 16px;
+  color: #616161;
+  line-height: 1.6;
+  margin-bottom: 0;
+  font-weight: 400;
+}
+
+/* ============ 7. 分页/导航优化 ============ */
+
+/* 手工风格分页 */
+.hand-pagination {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: var(--space-xl);
+}
+
+.hand-pagination-item {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border: 1px solid rgba(21, 101, 192, 0.2);
+  border-radius: 8px;
+  font-weight: 600;
+  color: #1565c0;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.hand-pagination-item:hover {
+  transform: translateY(-3px);
+  background: rgba(21, 101, 192, 0.05);
+  border-color: rgba(21, 101, 192, 0.4);
+}
+
+.hand-pagination-item.active {
+  background: linear-gradient(135deg, #1565c0 0%, #1976d2 100%);
+  color: white;
+  border-color: transparent;
+}
+
+/* ============ 8. 标签优化 ============ */
+
+/* 手工风格标签 */
+.hand-tag {
+  display: inline-block;
+  padding: 6px 14px;
+  background: rgba(21, 101, 192, 0.08);
+  color: #1565c0;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 6px 10px 10px 6px;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(21, 101, 192, 0.15);
+}
+
+.hand-tag:hover {
+  background: rgba(21, 101, 192, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(21, 101, 192, 0.15);
+}
+
+/* ============ 9. 动画优化 ============ */
+
+/* 随机延迟的淡入动画 */
+.fade-in-stagger {
+  opacity: 0;
+  animation: fadeIn 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+.fade-in-stagger:nth-child(1) { animation-delay: 0s; }
+.fade-in-stagger:nth-child(2) { animation-delay: 0.08s; }
+.fade-in-stagger:nth-child(3) { animation-delay: 0.15s; }
+.fade-in-stagger:nth-child(4) { animation-delay: 0.22s; }
+.fade-in-stagger:nth-child(5) { animation-delay: 0.28s; }
+.fade-in-stagger:nth-child(6) { animation-delay: 0.35s; }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 悬停时的微妙晃动 */
+.hover-wiggle {
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.hover-wiggle:hover {
+  animation: wiggle 0.5s ease;
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-2deg); }
+  75% { transform: rotate(2deg); }
+}
+
+/* ============ 10. 装饰性图标 ============ */
+
+/* 手绘风格装饰图标 */
+.hand-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: rgba(21, 101, 192, 0.08);
+  border-radius: 50%;
+  border: 1px dashed rgba(21, 101, 192, 0.3);
+  color: #1565c0;
+  transition: all 0.3s ease;
+}
+
+.hand-icon:hover {
+  background: rgba(21, 101, 192, 0.15);
+  border-color: rgba(21, 101, 192, 0.5);
+  transform: rotate(10deg) scale(1.1);
+}

@@ -1,0 +1,206 @@
+/* 资质证书板块样式 */
+.certificates-section {
+  padding: 120px 0;
+  background: linear-gradient(180deg, white 0%, #f5f7fa 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.certificates-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 50%, rgba(21, 101, 192, 0.03) 0%, transparent 50%),
+              radial-gradient(circle at 80% 50%, rgba(66, 165, 245, 0.03) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.certificates-slider {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  margin-top: 80px;
+  position: relative;
+  z-index: 1;
+}
+
+.certificate-card {
+  background: white;
+  border-radius: 20px;
+  padding: 50px 30px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e3f2fd;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.certificate-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #1565c0 0%, #42a5f5 50%, #64b5f6 100%);
+  transform: scaleX(0);
+  transition: transform 0.5s ease;
+}
+
+.certificate-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 20px 60px rgba(21, 101, 192, 0.15);
+  border-color: #42a5f5;
+}
+
+.certificate-card:hover::before {
+  transform: scaleX(1);
+}
+
+.certificate-icon {
+  width: 90px;
+  height: 90px;
+  margin: 0 auto 30px;
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s ease;
+  position: relative;
+}
+
+.certificate-icon::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1565c0 0%, #42a5f5 100%);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.4s ease;
+}
+
+.certificate-card:hover .certificate-icon {
+  background: white;
+  transform: scale(1.1);
+}
+
+.certificate-card:hover .certificate-icon::before {
+  opacity: 1;
+}
+
+.certificate-icon svg {
+  width: 45px;
+  height: 45px;
+  stroke: #1565c0;
+  transition: stroke 0.4s ease;
+}
+
+.certificate-card:hover .certificate-icon svg {
+  stroke: white;
+}
+
+.certificate-card h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1565c0;
+  margin-bottom: 15px;
+  line-height: 1.4;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.certificate-card p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #757575;
+  margin: 0;
+  min-height: 50px;
+}
+
+.certificate-badge {
+  display: inline-block;
+  margin-top: 25px;
+  padding: 8px 20px;
+  background: linear-gradient(135deg, #1565c0 0%, #42a5f5 100%);
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(21, 101, 192, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.certificate-card:hover .certificate-badge {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(21, 101, 192, 0.4);
+}
+
+/* 动画效果 */
+.animate-fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animate-fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 响应式 */
+@media (max-width: 1200px) {
+  .certificates-slider {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .certificates-section {
+    padding: 80px 0;
+  }
+
+  .certificates-slider {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .certificate-card {
+    padding: 35px 20px;
+  }
+
+  .certificate-icon {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 20px;
+  }
+
+  .certificate-icon svg {
+    width: 35px;
+    height: 35px;
+  }
+
+  .certificate-card h3 {
+    font-size: 16px;
+    min-height: 45px;
+  }
+
+  .certificate-card p {
+    font-size: 13px;
+    min-height: 42px;
+  }
+}
+
+@media (max-width: 480px) {
+  .certificates-slider {
+    grid-template-columns: 1fr;
+  }
+}

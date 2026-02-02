@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ============================================
+  网站地图 - 百度SEO专属配置
+  ============================================
+  
+  说明：
+  1. 此文件为模板，实际sitemap.xml由系统自动生成
+  2. 系统会自动读取/markdown文件夹下的所有md文件
+  3. 根据Git提交时间自动更新lastmod字段
+  4. 推送到GitHub后，Vercel会自动更新此文件
+  
+  百度SEO规范：
+  - URL层级≤3级
+  - 按更新时间倒序排列
+  - 标注优先级和更新频率
+  - 仅包含百度可抓取的有效页面
+  
+  手动更新方法：
+  1. 复制此文件为sitemap.xml
+  2. 修改your-site.vercel.app为您的实际域名
+  3. 根据实际文章列表添加url节点
+  
+  ============================================
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- 首页 - 最高优先级 -->
+  <url>
+    <loc>https://your-site.vercel.app/</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <!-- 文章列表页 -->
+  <url>
+    <loc>https://your-site.vercel.app/articles.html</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- 关于我们 -->
+  <url>
+    <loc>https://your-site.vercel.app/about.html</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- 联系方式 -->
+  <url>
+    <loc>https://your-site.vercel.app/contact.html</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- 文章详情页（由系统自动生成） -->
+  <!-- 示例：
+  <url>
+    <loc>https://your-site.vercel.app/article/政府采购法最新修订解读.html</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  -->
+</urlset>

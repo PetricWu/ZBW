@@ -1,0 +1,91 @@
+# ============================================
+# robots.txt - 百度SEO专属配置
+# ============================================
+# 
+# 说明：
+# 1. 允许百度所有爬虫抓取有效内容
+# 2. 禁止抓取无意义的静态资源目录
+# 3. 指向sitemap.xml位置
+#
+# 百度爬虫列表：
+# - Baiduspider：百度网页搜索
+# - Baiduspider-mobile：百度移动搜索
+# - Baiduspider-image：百度图片搜索
+# - Baiduspider-video：百度视频搜索
+# - Baiduspider-news：百度新闻搜索
+#
+# ============================================
+
+User-agent: Baiduspider
+Allow: /
+Disallow: /css/
+Disallow: /js/
+Disallow: /images/
+Disallow: /markdown/
+
+User-agent: Baiduspider-mobile
+Allow: /
+Disallow: /css/
+Disallow: /js/
+Disallow: /images/
+Disallow: /markdown/
+
+User-agent: Baiduspider-image
+Allow: /
+Disallow: /css/
+Disallow: /js/
+Disallow: /markdown/
+
+User-agent: Baiduspider-video
+Allow: /
+Disallow: /css/
+Disallow: /js/
+Disallow: /images/
+Disallow: /markdown/
+
+User-agent: Baiduspider-news
+Allow: /
+Disallow: /css/
+Disallow: /js/
+Disallow: /images/
+Disallow: /markdown/
+
+# 其他搜索引擎爬虫
+User-agent: Googlebot
+Allow: /
+Disallow: /css/
+Disallow: /js/
+Disallow: /images/
+Disallow: /markdown/
+
+User-agent: Bingbot
+Allow: /
+Disallow: /css/
+Disallow: /js/
+Disallow: /images/
+Disallow: /markdown/
+
+User-agent: Sogou spider
+Allow: /
+Disallow: /css/
+Disallow: /js/
+Disallow: /images/
+Disallow: /markdown/
+
+User-agent: 360Spider
+Allow: /
+Disallow: /css/
+Disallow: /js/
+Disallow: /images/
+Disallow: /markdown/
+
+# 通用规则
+User-agent: *
+Allow: /
+Disallow: /css/
+Disallow: /js/
+Disallow: /images/
+Disallow: /markdown/
+
+# 网站地图（百度会自动抓取）
+Sitemap: https://your-site.vercel.app/sitemap.xml

@@ -1,0 +1,376 @@
+/* ============================================
+   轮播图手工设计优化
+   ============================================ */
+
+/* 轮播图容器优化 */
+.home-banner {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  overflow: hidden;
+  background: #1a365d;
+}
+
+/* 添加装饰性有机形状 */
+.home-banner::before {
+  content: '';
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  top: -100px;
+  right: -100px;
+  background: radial-gradient(circle,
+    rgba(66, 165, 245, 0.15) 0%,
+    transparent 70%
+  );
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  animation: organicFloat 12s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.home-banner::after {
+  content: '';
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  bottom: -80px;
+  left: -80px;
+  background: radial-gradient(circle,
+    rgba(21, 101, 192, 0.1) 0%,
+    transparent 70%
+  );
+  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+  animation: organicFloat 15s ease-in-out infinite reverse;
+  pointer-events: none;
+}
+
+/* 轮播内容区域 - 黄金分割布局 */
+.banner-text {
+  max-width: 650px;
+  color: #ffffff;
+  position: relative;
+  padding-left: 20px;
+  /* 黄金分割：内容区域占据约61.8%的高度 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* 添加装饰线 */
+.banner-text::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 5px;
+  bottom: 5px;
+  width: 4px;
+  background: linear-gradient(180deg,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(66, 165, 245, 0.6) 100%
+  );
+  border-radius: 2px;
+}
+
+/* 标题统一样式 */
+.banner-heading {
+  /* 统一字体大小 */
+  font-size: 44px;
+  font-weight: 700;
+  line-height: 1.3;
+  /* 统一间距 */
+  margin: 0;
+  padding: 0;
+  color: #ffffff;
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+}
+
+/* 副标题统一样式 */
+.banner-subheading {
+  display: block;
+  /* 统一字体大小 */
+  font-size: 32px;
+  font-weight: 600;
+  color: #ffffff;
+  /* 统一间距 */
+  margin-top: 12px;
+  margin-bottom: 20px;
+  margin-left: 0;
+  margin-right: 0;
+  padding: 0;
+  opacity: 1;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* 描述优化 */
+.banner-desc {
+  font-size: 17px;
+  line-height: 1.7;
+  color: #cbd5e0;
+  /* 统一间距 */
+  margin: 0 0 24px 0;
+  padding: 0;
+  font-weight: 400;
+}
+
+/* 描述添加装饰 */
+.banner-desc::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: rgba(66, 165, 245, 0.6);
+  border-radius: 50%;
+  margin-right: 8px;
+  vertical-align: middle;
+  animation: dotPulse 2s ease-in-out infinite;
+}
+
+/* 按钮容器优化 - 确保按钮始终可见 */
+.banner-buttons {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 10;
+  margin-top: 24px;
+  /* 确保容器始终可见 */
+  visibility: visible;
+  opacity: 1;
+}
+
+/* 确保所有轮播项中的按钮都可见 */
+.banner-slide-item .banner-buttons,
+.banner-slide-item.active .banner-buttons {
+  visibility: visible;
+  opacity: 1;
+  display: flex;
+}
+
+/* 主要按钮优化 - 确保常显示 */
+.banner-btn-primary {
+  padding: 14px 32px;
+  background: linear-gradient(135deg, #ffffff 0%, #f7fafc 100%);
+  color: #1565c0;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px 12px 12px 8px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  /* 确保按钮始终可见 */
+  visibility: visible;
+  opacity: 1;
+}
+
+.banner-btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(21, 101, 192, 0.1),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.banner-btn-primary:hover {
+  transform: translateY(-3px) translateX(2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  color: #0d47a1;
+}
+
+.banner-btn-primary:hover::before {
+  left: 100%;
+}
+
+/* 次要按钮优化 - 确保常显示 */
+.banner-btn-secondary {
+  padding: 14px 32px;
+  background: transparent;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  border-radius: 8px 12px 12px 8px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  position: relative;
+  z-index: 1;
+  /* 确保按钮始终可见 */
+  visibility: visible;
+  opacity: 1;
+  display: inline-flex;
+}
+
+.banner-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.7);
+  transform: translateY(-3px) translateX(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* 导航按钮优化 */
+.banner-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 56px;
+  height: 56px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  z-index: 10;
+}
+
+.banner-nav:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.banner-nav:active {
+  transform: translateY(-50%) scale(1.05);
+}
+
+.banner-nav svg {
+  width: 24px;
+  height: 24px;
+  color: white;
+  transition: transform 0.3s ease;
+}
+
+.banner-nav:hover svg {
+  transform: scale(1.1);
+}
+
+.banner-nav-prev {
+  left: 24px;
+}
+
+.banner-nav-next {
+  right: 24px;
+}
+
+/* 轮播指示器优化 */
+.banner-indicators {
+  position: absolute;
+  bottom: 32px;
+  left: 24px;
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+
+.banner-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.banner-indicator:hover {
+  background: rgba(255, 255, 255, 0.6);
+  transform: scale(1.2);
+}
+
+.banner-indicator.active {
+  background: #ffffff;
+  width: 36px;
+  border-radius: 6px;
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+/* 添加数字指示器 */
+.banner-number {
+  position: absolute;
+  bottom: 32px;
+  right: 32px;
+  font-size: 48px;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.1);
+  font-family: 'Arial', sans-serif;
+  line-height: 1;
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* 背景纹理 */
+.banner-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.04;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+/* 响应式优化 */
+@media (max-width: 768px) {
+  .banner-heading {
+    font-size: 32px;
+  }
+
+  .banner-subheading {
+    font-size: 24px;
+  }
+
+  .banner-desc {
+    font-size: 15px;
+  }
+
+  .banner-buttons {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .banner-nav {
+    width: 44px;
+    height: 44px;
+  }
+
+  .banner-nav-prev {
+    left: 12px;
+  }
+
+  .banner-nav-next {
+    right: 12px;
+  }
+
+  .banner-indicators {
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20px;
+  }
+
+  .banner-number {
+    display: none;
+  }
+}

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60">
+  <!-- 背景 -->
+  <rect x="0" y="0" width="200" height="60" fill="none"/>
+
+  <!-- 图标部分 -->
+  <rect x="10" y="10" width="40" height="40" rx="4" fill="#005EA5"/>
+
+  <!-- 招标图标 -->
+  <path d="M20 25 L30 25 M20 30 L35 30 M20 35 L30 35" stroke="white" stroke-width="2" fill="none"/>
+  <path d="M25 38 L25 45 L40 45 L40 25 L35 25" stroke="white" stroke-width="2" fill="none"/>
+
+  <!-- 文字部分 -->
+  <text x="60" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Microsoft YaHei', sans-serif" font-size="18" font-weight="700" fill="#005EA5">华诚招标</text>
+  <text x="60" y="48" font-family="-apple-system, BlinkMacSystemFont, 'Microsoft YaHei', sans-serif" font-size="12" font-weight="500" fill="#666666">专业招标代理服务</text>
+</svg>
