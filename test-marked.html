@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Marked 测试</title>
+</head>
+<body>
+  <h1>Marked 库测试</h1>
+  <div id="result"></div>
+  
+  <script src="/js/marked.min.js"></script>
+  <script>
+    const resultDiv = document.getElementById('result');
+    
+    // 检查 marked 是否加载
+    if (typeof marked === 'undefined') {
+      resultDiv.innerHTML = '<p style="color: red;">错误：marked 库未加载</p>';
+    } else {
+      resultDiv.innerHTML = '<p style="color: green;">✓ marked 库已加载</p>';
+      
+      // 检查 parse 方法
+      if (typeof marked.parse === 'function') {
+        resultDiv.innerHTML += '<p style="color: green;">✓ marked.parse 方法存在</p>';
+        
+        // 测试解析
+        try {
+          const testMarkdown = '# 测试标题\n\n这是一个测试段落。';
+          const html = marked.parse(testMarkdown);
+          resultDiv.innerHTML += '<p style="color: green;">✓ 解析成功</p>';
+          resultDiv.innerHTML += '<h3>解析结果：</h3>';
+          resultDiv.innerHTML += '<pre>' + html + '</pre>';
+        } catch (e) {
+          resultDiv.innerHTML += '<p style="color: red;">✗ 解析失败：' + e.message + '</p>';
+        }
+      } else {
+        resultDiv.innerHTML += '<p style="color: red;">✗ marked.parse 方法不存在</p>';
+      }
+      
+      // 输出 marked 对象的所有属性
+      resultDiv.innerHTML += '<h3>marked 对象属性：</h3>';
+      resultDiv.innerHTML += '<pre>' + JSON.stringify(Object.keys(marked), null, 2) + '</pre>';
+    }
+  </script>
+</body>
+</html>

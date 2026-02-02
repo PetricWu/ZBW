@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>模态框测试</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body data-page="articles">
+  <h1>模态框测试</h1>
+  
+  <div style="margin: 20px 0;">
+    <button onclick="testShowModal()" style="padding: 10px 20px; font-size: 16px;">
+      测试显示模态框
+    </button>
+    <button onclick="testHideModal()" style="padding: 10px 20px; font-size: 16px; margin-left: 10px;">
+      测试隐藏模态框
+    </button>
+  </div>
+  
+  <div id="test-log" style="background: #f0f0f0; padding: 10px; margin-top: 20px; font-family: monospace;"></div>
+  
+  <!-- 模态框 -->
+  <div class="article-modal" id="articleModal" aria-hidden="true">
+    <div class="article-modal-overlay" id="articleModalOverlay"></div>
+    <div class="article-modal-content">
+      <div class="article-modal-header">
+        <h2 class="article-modal-title" id="articleModalTitle">测试标题</h2>
+        <button class="article-modal-close" type="button" id="articleModalClose">关闭</button>
+      </div>
+      <div class="article-modal-body">
+        <div class="article-modal-meta" id="articleModalMeta">测试元信息</div>
+        <div class="article-modal-text" id="articleModalText">
+          <h1>测试内容</h1>
+          <p>这是一段测试内容，用于验证模态框是否正常显示。</p>
+          <p>模态框应该覆盖整个页面，并显示在屏幕中央。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    const logDiv = document.getElementById('test-log');
+    
+    function log(text) {
+      const p = document.createElement('p');
+      p.textContent = new Date().toLocaleTimeString() + ' - ' + text;
+      logDiv.appendChild(p);
+      console.log(text);
+    }
+    
+    function testShowModal() {
+      log('开始测试显示模态框');
+      
+      const modal = document.getElementById('articleModal');
+      log('模态框元素: ' + (modal ? '存在' : '不存在'));
+      
+      if (!modal) {
+        log('错误：模态框元素不存在');
+        return;
+      }
+      
+      log('当前类名: ' + modal.className);
+      log('当前 display: ' + window.getComputedStyle(modal).display);
+      log('当前 z-index: ' + window.getComputedStyle(modal).zIndex);
+      
+      modal.classList.add('active');
+      log('添加 active 类');
+      log('新的类名: ' + modal.className);
+      log('新的 display: ' + window.getComputedStyle(modal).display);
+      
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      log('模态框应该已经显示');
+    }
+    
+    function testHideModal() {
+      log('开始测试隐藏模态框');
+      
+      const modal = document.getElementById('articleModal');
+      if (!modal) {
+        log('错误：模态框元素不存在');
+        return;
+      }
+      
+      modal.classList.remove('active');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      log('模态框应该已经隐藏');
+    }
+    
+    // 页面加载后自动测试
+    window.addEventListener('load', () => {
+      log('页面加载完成');
+      
+      setTimeout(() => {
+        log('自动显示模态框测试...');
+        testShowModal();
+      }, 1000);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Functions 测试工具</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; padding: 20px; background: #f5f7fa; }
+    .container { max-width: 800px; margin: 0 auto; }
+    h1 { color: #005EA5; margin-bottom: 20px; }
+    .test-card { background: white; padding: 20px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .test-button { padding: 12px 24px; background: #005EA5; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
+    .test-button:hover { background: #004A82; }
+    .test-button:disabled { background: #ccc; cursor: not-allowed; }
+    .result { margin-top: 15px; padding: 15px; border-radius: 4px; font-family: monospace; font-size: 14px; white-space: pre-wrap; }
+    .result.success { background: #d4edda; color: #155724; }
+    .result.error { background: #f8d7da; color: #721c24; }
+    .result.info { background: #e8f4f8; color: #005EA5; }
+    .loading { display: inline-block; margin-left: 10px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🧪 Netlify Functions 测试工具</h1>
+
+    <div class="test-card">
+      <h2>📄 更新文章索引 API</h2>
+      <p style="color: #666; margin-bottom: 15px;">
+        测试 <code>/api/update-index</code> 端点是否正常工作
+      </p>
+      <button class="test-button" onclick="testUpdateIndex()" id="btn-update-index">
+        测试 update-index API
+      </button>
+      <span class="loading" id="loading-update-index"></span>
+      <div class="result" id="result-update-index"></div>
+    </div>
+
+    <div class="test-card">
+      <h2>📧 联系表单 API</h2>
+      <p style="color: #666; margin-bottom: 15px;">
+        测试 <code>/api/contact</code> 端点是否正常工作
+      </p>
+      <button class="test-button" onclick="testContact()" id="btn-contact">
+        测试 contact API
+      </button>
+      <span class="loading" id="loading-contact"></span>
+      <div class="result" id="result-contact"></div>
+    </div>
+
+    <div class="test-card">
+      <h2>📊 诊断信息</h2>
+      <div class="result info" id="diagnostic-info">
+        点击下方按钮获取诊断信息
+      </div>
+      <button class="test-button" onclick="getDiagnostic()" style="margin-top: 15px;">
+        获取诊断信息
+      </button>
+    </div>
+
+    <div class="test-card">
+      <h2>📖 使用说明</h2>
+      <ul style="margin-left: 20px; color: #666; line-height: 1.8;">
+        <li><strong>update-index API</strong>: 应该返回成功并显示文章列表</li>
+        <li><strong>contact API</strong>: 使用 POST 方法测试 GET 会返回 405</li>
+        <li><strong>诊断信息</strong>: 显示当前页面和 Functions 的相关信息</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    async function testUpdateIndex() {
+      const button = document.getElementById('btn-update-index');
+      const result = document.getElementById('result-update-index');
+      const loading = document.getElementById('loading-update-index');
+
+      button.disabled = true;
+      loading.textContent = '测试中...';
+      result.textContent = '';
+      result.className = 'result';
+
+      try {
+        const response = await fetch('/api/update-index');
+        const data = await response.json();
+
+        if (response.ok) {
+          result.textContent = `✅ 成功!\n\n${JSON.stringify(data, null, 2)}`;
+          result.className = 'result success';
+        } else {
+          result.textContent = `❌ 失败 (${response.status})\n\n${JSON.stringify(data, null, 2)}`;
+          result.className = 'result error';
+        }
+      } catch (error) {
+        result.textContent = `❌ 网络错误:\n\n${error.message}`;
+        result.className = 'result error';
+      }
+
+      button.disabled = false;
+      loading.textContent = '';
+    }
+
+    async function testContact() {
+      const button = document.getElementById('btn-contact');
+      const result = document.getElementById('result-contact');
+      const loading = document.getElementById('loading-contact');
+
+      button.disabled = true;
+      loading.textContent = '测试中...';
+      result.textContent = '';
+      result.className = 'result';
+
+      try {
+        // 测试 GET 请求（应该返回 405）
+        const response = await fetch('/api/contact');
+        const data = await response.json();
+
+        if (response.status === 405) {
+          result.textContent = `✅ 正常 (405 Method Not Allowed)\n\ncontact API 只接受 POST 请求\n\n响应:\n${JSON.stringify(data, null, 2)}`;
+          result.className = 'result success';
+        } else {
+          result.textContent = `❓ 意外的状态 (${response.status})\n\n${JSON.stringify(data, null, 2)}`;
+          result.className = 'result info';
+        }
+      } catch (error) {
+        result.textContent = `❌ 网络错误:\n\n${error.message}`;
+        result.className = 'result error';
+      }
+
+      button.disabled = false;
+      loading.textContent = '';
+    }
+
+    function getDiagnostic() {
+      const result = document.getElementById('diagnostic-info');
+
+      const info = {
+        当前URL: window.location.href,
+        当前时间: new Date().toISOString(),
+        用户代理: navigator.userAgent.substring(0, 100) + '...',
+        屏幕尺寸: `${window.screen.width}x${window.screen.height}`,
+        窗口尺寸: `${window.innerWidth}x${window.innerHeight}`,
+      };
+
+      result.textContent = JSON.stringify(info, null, 2);
+    }
+
+    // 页面加载时自动获取诊断信息
+    window.addEventListener('load', getDiagnostic);
+  </script>
+</body>
+</html>

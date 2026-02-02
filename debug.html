@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>调试页面</title>
+  <style>
+    body { font-family: monospace; padding: 20px; }
+    .log { margin: 10px 0; padding: 10px; background: #f0f0f0; }
+    .success { color: green; }
+    .error { color: red; }
+    .info { color: blue; }
+  </style>
+</head>
+<body data-page="articles">
+  <h1>调试页面</h1>
+  <div id="logs"></div>
+  
+  <button onclick="window.location.reload()">刷新页面</button>
+  
+  <script>
+    const logs = document.getElementById('logs');
+    
+    function log(text, type = 'info') {
+      const div = document.createElement('div');
+      div.className = 'log ' + type;
+      div.textContent = new Date().toLocaleTimeString() + ' - ' + text;
+      logs.appendChild(div);
+      console.log(text);
+    }
+    
+    log('页面开始加载...', 'info');
+    
+    // 检查环境
+    log('document.body.dataset.page = ' + document.body.dataset.page, 'info');
+    log('document.readyState = ' + document.readyState, 'info');
+    
+    // 加载脚本
+    function loadScript(src, callback) {
+      const script = document.createElement('script');
+      script.src = src;
+      script.onload = () => {
+        log('✓ ' + src + ' 加载完成', 'success');
+        if (callback) callback();
+      };
+      script.onerror = () => {
+        log('✗ ' + src + ' 加载失败', 'error');
+      };
+      document.head.appendChild(script);
+    }
+    
+    // 依次加载脚本
+    loadScript('/config.js', () => {
+      log('typeof SITE_CONFIG = ' + typeof SITE_CONFIG, 'info');
+      
+      loadScript('/js/marked.min.js', () => {
+        log('typeof marked = ' + typeof marked, 'info');
+        if (typeof marked !== 'undefined') {
+          log('typeof marked.parse = ' + typeof marked.parse, 'info');
+        }
+        
+        loadScript('/js/main.js', () => {
+          log('✓ main.js 加载完成', 'success');
+          
+          // 延迟检查，确保所有代码都执行完毕
+          setTimeout(() => {
+            log('====== 脚本加载完成后的状态 ======', 'info');
+            log('typeof showArticleModal = ' + typeof showArticleModal, 'info');
+            log('typeof window.showArticleModal = ' + typeof window.showArticleModal, 'info');
+            log('typeof closeArticleModal = ' + typeof closeArticleModal, 'info');
+            log('typeof window.closeArticleModal = ' + typeof window.closeArticleModal, 'info');
+            
+            // 检查模态框元素
+            log('====== 模态框元素检查 ======', 'info');
+            log('articleModal: ' + (document.getElementById('articleModal') ? '存在' : '不存在'), 'info');
+            log('articleModalTitle: ' + (document.getElementById('articleModalTitle') ? '存在' : '不存在'), 'info');
+            log('articleModalText: ' + (document.getElementById('articleModalText') ? '存在' : '不存在'), 'info');
+          }, 2000);
+        });
+      });
+    });
+  </script>
+  
+  <!-- 模态框 -->
+  <div class="article-modal" id="articleModal" aria-hidden="true">
+    <div class="article-modal-overlay" id="articleModalOverlay"></div>
+    <div class="article-modal-content">
+      <div class="article-modal-header">
+        <h2 class="article-modal-title" id="articleModalTitle"></h2>
+        <button class="article-modal-close" type="button" id="articleModalClose">关闭</button>
+      </div>
+      <div class="article-modal-body">
+        <div class="article-modal-meta" id="articleModalMeta"></div>
+        <div class="article-modal-text" id="articleModalText"></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

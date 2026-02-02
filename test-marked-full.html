@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Marked 功能测试</title>
+</head>
+<body>
+  <h1>Marked 功能测试</h1>
+  <div id="result"></div>
+  
+  <script src="/js/marked.min.js"></script>
+  <script>
+    const resultDiv = document.getElementById('result');
+    
+    function addResult(text, color = 'black') {
+      const p = document.createElement('p');
+      p.style.color = color;
+      p.textContent = text;
+      resultDiv.appendChild(p);
+    }
+    
+    // 检查 marked 是否加载
+    addResult('正在检查 marked 库...');
+    
+    if (typeof marked === 'undefined') {
+      addResult('✗ marked 库未加载', 'red');
+    } else {
+      addResult('✓ marked 库已加载', 'green');
+      addResult('marked 对象的属性：' + Object.keys(marked).join(', '), 'blue');
+      
+      // 检查 parse 方法
+      if (typeof marked.parse === 'function') {
+        addResult('✓ marked.parse 方法存在', 'green');
+        
+        // 测试解析
+        try {
+          const testMarkdown = '# 测试标题\n\n这是一个测试段落。\n\n## 二级标题\n\n- 列表项1\n- 列表项2';
+          const html = marked.parse(testMarkdown);
+          addResult('✓ 解析成功', 'green');
+          
+          const pre = document.createElement('pre');
+          pre.style.background = '#f0f0f0';
+          pre.style.padding = '10px';
+          pre.style.overflow = 'auto';
+          pre.textContent = html;
+          resultDiv.appendChild(pre);
+          
+          const hr = document.createElement('hr');
+          resultDiv.appendChild(hr);
+          
+          const h3 = document.createElement('h3');
+          h3.textContent = '渲染结果：';
+          resultDiv.appendChild(h3);
+          
+          const div = document.createElement('div');
+          div.innerHTML = html;
+          resultDiv.appendChild(div);
+          
+        } catch (e) {
+          addResult('✗ 解析失败：' + e.message, 'red');
+          addResult('错误详情：' + e.stack, 'red');
+        }
+      } else {
+        addResult('✗ marked.parse 方法不存在', 'red');
+        addResult('尝试查找其他解析方法...', 'blue');
+        
+        // 尝试其他可能的解析方法
+        if (typeof marked.marked === 'object' && typeof marked.marked.parse === 'function') {
+          addResult('找到 marked.marked.parse 方法', 'green');
+        } else if (typeof marked.parser === 'function') {
+          addResult('找到 marked.parser 方法', 'green');
+        } else if (typeof marked.Parser === 'function') {
+          addResult('找到 marked.Parser 方法', 'green');
+        }
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <!-- ============================================
+       百度SEO基础配置
+       ============================================ -->
+  
+  <!-- 页面标题（百度：20-30个中文字符） -->
+  <title>华诚招标代理-专业政府采购工程招标代理服务机构</title>
+  
+  <!-- 页面描述（百度：80-120个中文字符） -->
+  <meta name="description" content="华诚招标代理是专业招标代理服务机构，提供政府采购、工程招标、项目咨询等一站式招投标服务，15年行业经验，2000+成功项目，98%客户满意度。">
+  
+  <!-- 页面关键词（百度：≤5个） -->
+  <meta name="keywords" content="招标代理,政府采购,工程招标,招投标服务,项目公告">
+  
+  <!-- 作者与版权 -->
+  <meta name="author" content="华诚招标代理">
+  <meta name="copyright" content="华诚招标代理有限公司">
+  
+  <!-- 搜索引擎优化 -->
+  <meta name="robots" content="index, follow">
+  <meta name="googlebot" content="index, follow">
+  <meta name="baiduspider" content="index, follow">
+  
+  <!-- 百度移动适配 -->
+  <meta name="applicable-device" content="pc,mobile">
+  <meta name="mobile-agent" content="format=html5;url=https://your-site.vercel.app/">
+  <meta name="renderer" content="webkit">
+  
+  <!-- Canonical标签（避免重复内容） -->
+  <link rel="canonical" href="https://your-site.vercel.app/">
+  
+  <!-- 开放图谱（Open Graph） -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="华诚招标代理-专业政府采购工程招标代理服务机构">
+  <meta property="og:description" content="提供政府采购、工程招标、项目咨询等一站式招投标服务">
+  <meta property="og:url" content="https://your-site.vercel.app/">
+  <meta property="og:site_name" content="华诚招标代理">
+  <meta property="og:image" content="https://your-site.vercel.app/images/og-image.png">
+  <meta property="og:locale" content="zh_CN">
+  
+  <!-- Twitter卡片 -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="华诚招标代理-专业招标代理服务机构">
+  <meta name="twitter:description" content="提供政府采购、工程招标、项目咨询等一站式招投标服务">
+  <meta name="twitter:image" content="https://your-site.vercel.app/images/og-image.png">
+  
+  <!-- 移动端优化 -->
+  <meta name="format-detection" content="telephone=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="华诚招标代理">
+  
+  <!-- 性能优化 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  
+  <!-- 样式文件 -->
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/hero-slider.css">
+  
+  <!-- 站点图标 -->
+  <link rel="icon" type="image/png" href="/images/favicon.png">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  
+  <!-- ============================================
+       百度结构化数据（JSON-LD格式）
+       ============================================ -->
+  <script type="application/ld+json" data-schema="Organization">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "华诚招标代理",
+    "url": "https://your-site.vercel.app",
+    "logo": "https://your-site.vercel.app/images/logo.png",
+    "description": "专业招标代理服务机构，提供政府采购、工程招标、项目咨询等一站式招投标服务",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "400-888-6666",
+      "contactType": "customer service",
+      "areaServed": "CN",
+      "availableLanguage": "Chinese"
+    }
+  }
+  </script>
+  
+  <script type="application/ld+json" data-schema="WebSite">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "华诚招标代理",
+    "url": "https://your-site.vercel.app",
+    "description": "专业招标代理服务机构",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://your-site.vercel.app/articles.html?q={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+  
+  <!-- ============================================
+       百度统计代码（由config.js动态加载）
+       ============================================ -->
+</head>
+<body data-page="home">
+  
+  <!-- 粒子背景容器 -->
+  <div id="particle-container"></div>
+  
+  <!-- 滚动进度条 -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+  
+  <!-- 头部导航 -->
+  <header class="header">
+    <div class="header-inner">
+      <!-- LOGO -->
+      <a href="/" class="logo logo-decoration" title="华诚招标代理-专业招标代理服务机构">
+        <img src="/images/logo.png" alt="华诚招标代理-专业招标代理服务机构" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <span class="logo-text" style="display: none;">华诚招标代理</span>
+      </a>
+      
+      <!-- 导航菜单 -->
+      <nav class="nav" role="navigation" aria-label="主导航">
+        <a href="/" class="nav-item active">首页</a>
+        <a href="/articles.html" class="nav-item">文章资讯</a>
+        <a href="/about.html" class="nav-item">关于我们</a>
+        <a href="/contact.html" class="nav-item">联系方式</a>
+      </nav>
+      
+      <!-- 搜索框 -->
+      <div class="header-search">
+        <input type="text" class="search-input" placeholder="搜索文章..." aria-label="搜索文章">
+        <button class="search-btn" type="button">搜索</button>
+      </div>
+      
+      <!-- 移动端菜单按钮 -->
+      <button class="mobile-menu-btn" type="button" aria-label="打开菜单">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+  
+  <!-- 移动端菜单遮罩 -->
+  <div class="nav-overlay"></div>
+  
+  <!-- 主体内容 -->
+  <main class="main">
+    
+    <!-- 首页轮播图模块（新增） -->
+    <section class="banner-section" aria-label="首页轮播">
+      <div class="banner-container">
+        <!-- 轮播图1 -->
+        <div class="banner-slide active">
+          <img src="/images/banner/banner-1.jpg" alt="华诚招标代理-专业政府采购招标代理服务" loading="eager">
+          <div class="banner-content">
+            <h2 class="banner-title">专业招标代理服务</h2>
+            <p class="banner-subtitle">政府采购 · 工程招标 · 项目咨询</p>
+          </div>
+        </div>
+        
+        <!-- 轮播图2 -->
+        <div class="banner-slide">
+          <img src="/images/banner/banner-2.jpg" alt="招标代理公司-15年行业经验2000+成功案例" loading="lazy">
+          <div class="banner-content">
+            <h2 class="banner-title">15年行业经验</h2>
+            <p class="banner-subtitle">2000+成功项目 · 98%客户满意度</p>
+          </div>
+        </div>
+        
+        <!-- 轮播图3 -->
+        <div class="banner-slide">
+          <img src="/images/banner/banner-3.jpg" alt="政府采购招投标-一站式招投标解决方案" loading="lazy">
+          <div class="banner-content">
+            <h2 class="banner-title">一站式招投标解决方案</h2>
+            <p class="banner-subtitle">合规高效 · 诚信专业 · 全程服务</p>
+          </div>
+        </div>
+        
+        <!-- 左右箭头 -->
+        <button class="banner-prev" aria-label="上一张">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        <button class="banner-next" aria-label="下一张">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+        
+        <!-- 指示点 -->
+        <div class="banner-dots">
+          <button class="banner-dot active" aria-label="第1张"></button>
+          <button class="banner-dot" aria-label="第2张"></button>
+          <button class="banner-dot" aria-label="第3张"></button>
+        </div>
+        
+        <!-- 滚动进度指示器 -->
+        <div class="banner-progress"></div>
+      </div>
+    </section>
+    
+    <!-- 核心优势板块 -->
+    <section class="features-section">
+      <div class="container">
+        <h2 class="section-title animate-fade-up">核心优势</h2>
+        <p class="section-subtitle animate-fade-up" style="animation-delay: 0.1s;">专业、高效、可靠的招标代理服务</p>
+        
+        <div class="features-grid">
+          <div class="feature-card animate-fade-up" style="animation-delay: 0.1s;">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </div>
+            <h3 class="feature-title">专业团队</h3>
+            <p class="feature-desc">拥有一支由资深招标专家组成的专业团队，平均从业经验10年以上</p>
+            <div class="feature-stats">
+              <div class="feature-stat">
+                <span class="stat-number">50+</span>
+                <span class="stat-label">专业人才</span>
+              </div>
+              <div class="feature-stat">
+                <span class="stat-number">100%</span>
+                <span class="stat-label">持证上岗</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="feature-card animate-fade-up" style="animation-delay: 0.2s;">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+            <h3 class="feature-title">高效服务</h3>
+            <p class="feature-desc">标准化流程，快速响应，确保项目按时高质量完成</p>
+            <div class="feature-stats">
+              <div class="feature-stat">
+                <span class="stat-number">7天</span>
+                <span class="stat-label">快速交付</span>
+              </div>
+              <div class="feature-stat">
+                <span class="stat-number">99%</span>
+                <span class="stat-label">按时完成</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="feature-card animate-fade-up" style="animation-delay: 0.3s;">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+            </div>
+            <h3 class="feature-title">合规保障</h3>
+            <p class="feature-desc">严格遵循招投标法律法规，确保流程合法合规</p>
+            <div class="feature-stats">
+              <div class="feature-stat">
+                <span class="stat-number">100%</span>
+                <span class="stat-label">合规率</span>
+              </div>
+              <div class="feature-stat">
+                <span class="stat-number">0</span>
+                <span class="stat-label">投诉记录</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="feature-card animate-fade-up" style="animation-delay: 0.4s;">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <h3 class="feature-title">全程服务</h3>
+            <p class="feature-desc">从项目立项到合同签订，提供一站式全流程服务</p>
+            <div class="feature-stats">
+              <div class="feature-stat">
+                <span class="stat-number">6+</span>
+                <span class="stat-label">服务环节</span>
+              </div>
+              <div class="feature-stat">
+                <span class="stat-number">24h</span>
+                <span class="stat-label">在线响应</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 分类快捷入口（带线稿插图） -->
+    <section class="category-section">
+      <div class="container">
+        <h2 class="section-title">服务领域</h2>
+        <div class="category-grid">
+          <a href="/articles.html?q=政府采购" class="category-item">
+            <div class="category-icon">
+              <!-- 政府采购-建筑/政府线稿图标 -->
+              <svg class="line-icon" viewBox="0 0 48 48" aria-hidden="true">
+                <path d="M24 4L4 14v30h40V14L24 4z"/>
+                <path d="M14 44V24h8v20"/>
+                <path d="M26 44V24h8v20"/>
+                <path d="M4 14h40"/>
+                <path d="M24 4v10"/>
+              </svg>
+            </div>
+            <h3 class="category-name">政府采购</h3>
+            <p class="category-desc">政府采购项目代理服务</p>
+          </a>
+          
+          <a href="/articles.html?q=工程招标" class="category-item">
+            <div class="category-icon">
+              <!-- 工程招标-工具/工程线稿图标 -->
+              <svg class="line-icon" viewBox="0 0 48 48" aria-hidden="true">
+                <path d="M4 44L16 32l-4-4L4 36v8z"/>
+                <path d="M16 32l8-8"/>
+                <path d="M24 24l16-16"/>
+                <path d="M36 8l4 4"/>
+                <path d="M32 4l4 4"/>
+                <circle cx="40" cy="8" r="4"/>
+              </svg>
+            </div>
+            <h3 class="category-name">工程招标</h3>
+            <p class="category-desc">建设工程招标代理</p>
+          </a>
+          
+          <a href="/articles.html?q=项目咨询" class="category-item">
+            <div class="category-icon">
+              <!-- 项目咨询-文件/咨询线稿图标 -->
+              <svg class="line-icon" viewBox="0 0 48 48" aria-hidden="true">
+                <path d="M8 4h32v40H8z"/>
+                <path d="M14 12h20"/>
+                <path d="M14 20h20"/>
+                <path d="M14 28h12"/>
+                <circle cx="36" cy="34" r="6"/>
+                <path d="M34 34h4"/>
+                <path d="M36 32v4"/>
+              </svg>
+            </div>
+            <h3 class="category-name">项目咨询</h3>
+            <p class="category-desc">招投标全流程咨询</p>
+          </a>
+          
+          <a href="/articles.html?q=政策解读" class="category-item">
+            <div class="category-icon">
+              <!-- 政策解读-书本/政策线稿图标 -->
+              <svg class="line-icon" viewBox="0 0 48 48" aria-hidden="true">
+                <path d="M8 4h32v40H8z"/>
+                <path d="M8 12h32"/>
+                <path d="M12 8h4"/>
+                <path d="M14 20h16"/>
+                <path d="M14 26h16"/>
+                <path d="M14 32h10"/>
+                <circle cx="36" cy="36" r="4"/>
+              </svg>
+            </div>
+            <h3 class="category-name">政策解读</h3>
+            <p class="category-desc">最新招投标政策解析</p>
+          </a>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 大气轮播图 -->
+    <section class="hero-slider" id="heroSlider">
+      <!-- 轮播项目 -->
+      <div class="slider-track" id="sliderTrack">
+        
+        <!-- 轮播项 1：专业服务 -->
+        <div class="slider-item active">
+          <div class="slider-background">
+            <div class="gradient-overlay"></div>
+            <div class="pattern-overlay"></div>
+          </div>
+          <div class="slider-content">
+            <div class="container">
+              <div class="slider-text">
+                <span class="slider-tag">Professional Service</span>
+                <h1 class="slider-title">
+                  <span class="title-line">专业招标代理</span>
+                  <span class="title-line highlight">一站式解决方案</span>
+                </h1>
+                <p class="slider-description">
+                  15年行业经验 · 2000+成功项目 · 98%客户满意度
+                </p>
+                <div class="slider-stats">
+                  <div class="stat-item">
+                    <div class="stat-number" data-count="15">0</div>
+                    <div class="stat-label">年行业经验</div>
+                  </div>
+                  <div class="stat-item">
+                    <div class="stat-number" data-count="2000">0</div>
+                    <div class="stat-label">成功项目</div>
+                  </div>
+                  <div class="stat-item">
+                    <div class="stat-number" data-count="98">0%</div>
+                    <div class="stat-label">客户满意度</div>
+                  </div>
+                  <div class="stat-item">
+                    <div class="stat-number" data-count="500">0</div>
+                    <div class="stat-label">合作企业</div>
+                  </div>
+                </div>
+                <div class="slider-actions">
+                  <a href="/articles.html" class="btn btn-primary btn-lg">
+                    了解更多
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <line x1="5" y1="12" x2="19" y2="12"/>
+                      <polyline points="12 5 19 12 12 19"/>
+                    </svg>
+                  </a>
+                  <a href="/contact.html" class="btn btn-white btn-lg">
+                    立即咨询
+                  </a>
+                </div>
+              </div>
+              <div class="slider-image">
+                <div class="floating-card">
+                  <div class="card-icon">🏆</div>
+                  <div class="card-text">
+                    <div class="card-title">资质认证</div>
+                    <div class="card-desc">ISO9001质量管理体系认证</div>
+                  </div>
+                </div>
+                <div class="floating-card" style="animation-delay: 0.2s;">
+                  <div class="card-icon">⭐</div>
+                  <div class="card-text">
+                    <div class="card-title">荣誉奖项</div>
+                    <div class="card-desc">2023年度优秀招标代理机构</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 轮播项 2：工程招标 -->
+        <div class="slider-item">
+          <div class="slider-background" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+            <div class="gradient-overlay"></div>
+            <div class="pattern-overlay"></div>
+          </div>
+          <div class="slider-content">
+            <div class="container">
+              <div class="slider-text">
+                <span class="slider-tag">Engineering Bidding</span>
+                <h1 class="slider-title">
+                  <span class="title-line">工程招标代理</span>
+                  <span class="title-line highlight">全程专业服务</span>
+                </h1>
+                <p class="slider-description">
+                  从项目立项到合同签订，提供全流程专业化服务
+                </p>
+                <div class="service-highlights">
+                  <div class="highlight-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                      <polyline points="22 4 12 14.01 9 11.01"/>
+                    </svg>
+                    <span>资质齐全</span>
+                  </div>
+                  <div class="highlight-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"/>
+                      <polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                    <span>高效快捷</span>
+                  </div>
+                  <div class="highlight-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                    <span>安全保障</span>
+                  </div>
+                </div>
+                <div class="slider-actions">
+                  <a href="/articles.html?q=工程招标" class="btn btn-primary btn-lg">
+                    查看案例
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <line x1="5" y1="12" x2="19" y2="12"/>
+                      <polyline points="12 5 19 12 12 19"/>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 轮播项 3：政府采购 -->
+        <div class="slider-item">
+          <div class="slider-background" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
+            <div class="gradient-overlay"></div>
+            <div class="pattern-overlay"></div>
+          </div>
+          <div class="slider-content">
+            <div class="container">
+              <div class="slider-text">
+                <span class="slider-tag">Government Procurement</span>
+                <h1 class="slider-title">
+                  <span class="title-line">政府采购代理</span>
+                  <span class="title-line highlight">合规高效透明</span>
+                </h1>
+                <p class="slider-description">
+                  严格遵守政府采购法律法规，确保流程合法合规
+                </p>
+                <div class="process-preview">
+                  <div class="process-step-preview">
+                    <div class="step-preview-icon">1</div>
+                    <div class="step-preview-text">需求沟通</div>
+                  </div>
+                  <div class="process-step-preview">
+                    <div class="step-preview-icon">2</div>
+                    <div class="step-preview-text">方案设计</div>
+                  </div>
+                  <div class="process-step-preview">
+                    <div class="step-preview-icon">3</div>
+                    <div class="step-preview-text">文件编制</div>
+                  </div>
+                  <div class="process-step-preview">
+                    <div class="step-preview-icon">4</div>
+                    <div class="step-preview-text">开标评标</div>
+                  </div>
+                  <div class="process-step-preview">
+                    <div class="step-preview-icon">5</div>
+                    <div class="step-preview-text">结果公示</div>
+                  </div>
+                  <div class="process-step-preview">
+                    <div class="step-preview-icon">6</div>
+                    <div class="step-preview-text">资料归档</div>
+                  </div>
+                </div>
+                <div class="slider-actions">
+                  <a href="/articles.html?q=政府采购" class="btn btn-primary btn-lg">
+                    了解详情
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <line x1="5" y1="12" x2="19" y2="12"/>
+                      <polyline points="12 5 19 12 12 19"/>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 轮播项 4：联系我们 -->
+        <div class="slider-item">
+          <div class="slider-background" style="background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);">
+            <div class="gradient-overlay"></div>
+            <div class="pattern-overlay"></div>
+          </div>
+          <div class="slider-content">
+            <div class="container">
+              <div class="slider-text">
+                <span class="slider-tag">Contact Us</span>
+                <h1 class="slider-title">
+                  <span class="title-line">立即联系我们</span>
+                  <span class="title-line highlight">开启合作之旅</span>
+                </h1>
+                <p class="slider-description">
+                  专业团队随时为您提供咨询服务
+                </p>
+                <div class="contact-preview">
+                  <div class="contact-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                    </svg>
+                    <span>400-888-8888</span>
+                  </div>
+                  <div class="contact-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                      <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                    <span>contact@huacheng.com</span>
+                  </div>
+                  <div class="contact-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                      <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                    <span>北京市朝阳区建国路88号</span>
+                  </div>
+                </div>
+                <div class="slider-actions">
+                  <a href="/contact.html" class="btn btn-white btn-lg">
+                    在线咨询
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <line x1="5" y1="12" x2="19" y2="12"/>
+                      <polyline points="12 5 19 12 12 19"/>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 导航按钮 -->
+      <button class="slider-nav slider-nav-prev" id="sliderPrev">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+      </button>
+      <button class="slider-nav slider-nav-next" id="sliderNext">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
+      </button>
+
+      <!-- 指示器 -->
+      <div class="slider-indicators" id="sliderIndicators">
+        <button class="indicator active" data-slide="0"></button>
+        <button class="indicator" data-slide="1"></button>
+        <button class="indicator" data-slide="2"></button>
+        <button class="indicator" data-slide="3"></button>
+      </div>
+
+      <!-- 滚动提示 -->
+      <div class="scroll-hint">
+        <div class="scroll-hint-text">向下滑动了解更多</div>
+        <div class="scroll-hint-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+        
+        <div class="hero-stats">
+          <div class="hero-stat animate-fade-up" style="animation-delay: 0.1s;">
+            <div class="hero-stat-number" data-count="15">0</div>
+            <div class="hero-stat-label">年行业经验</div>
+          </div>
+          <div class="hero-stat animate-fade-up" style="animation-delay: 0.2s;">
+            <div class="hero-stat-number" data-count="2000">0</div>
+            <div class="hero-stat-label">成功项目</div>
+          </div>
+          <div class="hero-stat animate-fade-up" style="animation-delay: 0.3s;">
+            <div class="hero-stat-number" data-count="98">0%</div>
+            <div class="hero-stat-label">客户满意度</div>
+          </div>
+          <div class="hero-stat animate-fade-up" style="animation-delay: 0.4s;">
+            <div class="hero-stat-number" data-count="500">0</div>
+            <div class="hero-stat-label">合作企业</div>
+          </div>
+        </div>
+        
+        <!-- 服务流程 -->
+        <div class="service-process">
+          <h3 class="process-title animate-fade-up" style="animation-delay: 0.5s;">服务流程</h3>
+          <div class="process-steps">
+            <div class="process-step animate-fade-up" style="animation-delay: 0.6s;">
+              <div class="step-number">01</div>
+              <div class="step-content">
+                <h4 class="step-title">需求沟通</h4>
+                <p class="step-desc">深入了解客户需求，制定个性化方案</p>
+              </div>
+            </div>
+            <div class="process-step animate-fade-up" style="animation-delay: 0.7s;">
+              <div class="step-number">02</div>
+              <div class="step-content">
+                <h4 class="step-title">方案制定</h4>
+                <p class="step-desc">根据需求制定详细的招标代理方案</p>
+              </div>
+            </div>
+            <div class="process-step animate-fade-up" style="animation-delay: 0.8s;">
+              <div class="step-number">03</div>
+              <div class="step-content">
+                <h4 class="step-title">组织实施</h4>
+                <p class="step-desc">严格按照流程组织招标活动</p>
+              </div>
+            </div>
+            <div class="process-step animate-fade-up" style="animation-delay: 0.9s;">
+              <div class="step-number">04</div>
+              <div class="step-content">
+                <h4 class="step-title">结果交付</h4>
+                <p class="step-desc">及时交付结果，提供后续支持</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 最新文章（带线稿插图） -->
+    <section class="latest-section">
+      <div class="container">
+        <div class="latest-header">
+          <h2 class="latest-title">
+            <!-- 文章列表线稿图标 -->
+            <svg class="line-icon line-icon-sm" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 4h16v16H4z"/>
+              <path d="M8 8h8"/>
+              <path d="M8 12h8"/>
+              <path d="M8 16h5"/>
+            </svg>
+            最新资讯
+          </h2>
+          <a href="/articles.html" class="view-all-link">
+            查看全部
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </a>
+        </div>
+        
+        <!-- 文章列表容器 -->
+        <div class="article-list latest-articles">
+          <!-- 加载状态 -->
+          <div class="loading">
+            <div class="loading-spinner"></div>
+            <p class="loading-text">正在加载文章...</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 友情链接（新增） -->
+    <section class="friend-links-section">
+      <div class="container">
+        <h2 class="section-title">友情链接</h2>
+        <div class="friend-links-grid">
+          <a href="https://www.ccgp.gov.cn" target="_blank" rel="noopener noreferrer" class="friend-link-item">
+            <span class="friend-link-icon">🏛️</span>
+            <span class="friend-link-name">中国政府采购网</span>
+          </a>
+          <a href="https://www.chinabidding.com.cn" target="_blank" rel="noopener noreferrer" class="friend-link-item">
+            <span class="friend-link-icon">📋</span>
+            <span class="friend-link-name">中国采购与招标网</span>
+          </a>
+          <a href="http://www.cebpubservice.com" target="_blank" rel="noopener noreferrer" class="friend-link-item">
+            <span class="friend-link-icon">🏗️</span>
+            <span class="friend-link-name">中国招标投标公共服务平台</span>
+          </a>
+          <a href="https://www.npc.gov.cn" target="_blank" rel="noopener noreferrer" class="friend-link-item">
+            <span class="friend-link-icon">⚖️</span>
+            <span class="friend-link-name">全国人大网</span>
+          </a>
+          <a href="https://www.mof.gov.cn" target="_blank" rel="noopener noreferrer" class="friend-link-item">
+            <span class="friend-link-icon">💰</span>
+            <span class="friend-link-name">财政部官网</span>
+          </a>
+          <a href="https://www.ndrc.gov.cn" target="_blank" rel="noopener noreferrer" class="friend-link-item">
+            <span class="friend-link-icon">📊</span>
+            <span class="friend-link-name">国家发改委</span>
+          </a>
+        </div>
+      </div>
+    </section>
+    
+  </main>
+  
+  <!-- 底部信息 -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4 class="footer-section-title">关于我们</h4>
+          <p>华诚招标代理有限公司是专业的招标代理服务机构，拥有15年行业经验，致力于为政府和企业提供合规、高效的招投标服务。</p>
+        </div>
+        <div class="footer-section">
+          <h4 class="footer-section-title">快速链接</h4>
+          <ul class="footer-links">
+            <li><a href="/">首页</a></li>
+            <li><a href="/articles.html">文章资讯</a></li>
+            <li><a href="/about.html">关于我们</a></li>
+            <li><a href="/contact.html">联系方式</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4 class="footer-section-title">联系我们</h4>
+          <p>地址：北京市朝阳区建国路88号SOHO现代城A座1206室</p>
+          <p>电话：400-888-6666</p>
+          <p>邮箱：contact@huacheng-tender.com</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">
+          &copy; 2024 华诚招标代理有限公司 版权所有 | 京ICP备XXXXXXXX号
+        </p>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- 返回顶部按钮 -->
+  <button class="back-to-top" type="button" aria-label="返回顶部">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+  
+  <!-- 文章详情模态框 -->
+  <div class="article-modal" id="articleModal" aria-hidden="true">
+    <div class="article-modal-overlay" id="articleModalOverlay"></div>
+    <div class="article-modal-content">
+      <div class="article-modal-header">
+        <h2 class="article-modal-title" id="articleModalTitle"></h2>
+        <button class="article-modal-close" type="button" aria-label="关闭文章详情" id="articleModalClose">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="article-modal-body">
+        <div class="article-modal-meta" id="articleModalMeta"></div>
+        <div class="article-modal-text" id="articleModalText"></div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 脚本文件 -->
+  <script src="/config.js"></script>
+  <script src="/js/marked.min.js"></script>
+  <script src="/js/hero-slider.js"></script>
+  <script src="/js/main.js"></script>
+  
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>测试文章加载</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    #result {
+      margin-top: 20px;
+      padding: 10px;
+      background: #f5f5f5;
+      border-radius: 4px;
+    }
+    .article-item {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+    .article-title {
+      font-weight: bold;
+      color: #333;
+    }
+    .article-excerpt {
+      color: #666;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <h1>文章加载测试</h1>
+  <div id="status">正在测试...</div>
+  <div id="result"></div>
+
+  <script src="/js/marked.min.js"></script>
+  <script>
+    async function testArticleLoading() {
+      const statusDiv = document.getElementById('status');
+      const resultDiv = document.getElementById('result');
+      
+      try {
+        // 测试1: 检查marked库是否加载
+        statusDiv.innerHTML = '测试1: 检查 marked 库...';
+        if (typeof marked === 'undefined') {
+          throw new Error('marked 库未加载');
+        }
+        console.log('✓ marked 库已加载');
+        
+        // 测试2: 加载 index.json
+        statusDiv.innerHTML = '测试2: 加载 index.json...';
+        const response = await fetch('/markdown/index.json?t=' + Date.now());
+        if (!response.ok) {
+          throw new Error(`index.json 加载失败: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log('✓ index.json 加载成功', data);
+        
+        // 测试3: 解析文章列表
+        statusDiv.innerHTML = '测试3: 解析文章列表...';
+        const articles = data.articles || [];
+        if (articles.length === 0) {
+          throw new Error('文章列表为空');
+        }
+        console.log('✓ 文章列表解析成功，共 ' + articles.length + ' 篇文章');
+        
+        // 显示文章列表
+        statusDiv.innerHTML = '✓ 所有测试通过！';
+        resultDiv.innerHTML = '<h3>文章列表：</h3>' + articles.map(article => `
+          <div class="article-item">
+            <div class="article-title">${article.title}</div>
+            <div class="article-excerpt">${article.excerpt || '无摘要'}</div>
+          </div>
+        `).join('');
+        
+      } catch (error) {
+        statusDiv.innerHTML = '✗ 测试失败: ' + error.message;
+        console.error('测试失败:', error);
+        resultDiv.innerHTML = '<div style="color: red;">' + error.message + '</div>';
+      }
+    }
+    
+    // 页面加载后执行测试
+    window.addEventListener('DOMContentLoaded', testArticleLoading);
+  </script>
+</body>
+</html>

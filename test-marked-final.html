@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marked 库测试</title>
+</head>
+<body>
+  <h1>Marked 库加载测试</h1>
+  <div id="result"></div>
+  
+  <script src="/js/marked.min.js"></script>
+  <script>
+    const resultDiv = document.getElementById('result');
+    
+    function addResult(text, color = 'black') {
+      const p = document.createElement('p');
+      p.style.color = color;
+      p.textContent = text;
+      resultDiv.appendChild(p);
+      console.log(text);
+    }
+    
+    addResult('=== Marked 库测试 ===', 'blue');
+    addResult('typeof marked: ' + typeof marked);
+    addResult('typeof window.marked: ' + typeof window.marked);
+    
+    if (typeof marked !== 'undefined') {
+      addResult('✓ marked 对象存在', 'green');
+      addResult('marked 属性: ' + Object.keys(marked).join(', '), 'blue');
+      addResult('typeof marked.parse: ' + typeof marked.parse);
+      
+      // 测试解析
+      try {
+        const testMarkdown = '# 测试标题\n\n这是一个测试段落。\n\n- 列表项1\n- 列表项2';
+        addResult('测试 Markdown 内容:', 'blue');
+        addResult(testMarkdown, 'gray');
+        
+        const html = marked.parse(testMarkdown);
+        addResult('✓ 解析成功', 'green');
+        
+        addResult('解析结果:', 'blue');
+        const pre = document.createElement('pre');
+        pre.style.background = '#f0f0f0';
+        pre.style.padding = '10px';
+        pre.textContent = html;
+        resultDiv.appendChild(pre);
+        
+        const hr = document.createElement('hr');
+        resultDiv.appendChild(hr);
+        
+        const h3 = document.createElement('h3');
+        h3.textContent = '渲染结果：';
+        resultDiv.appendChild(h3);
+        
+        const div = document.createElement('div');
+        div.innerHTML = html;
+        resultDiv.appendChild(div);
+        
+      } catch (e) {
+        addResult('✗ 解析失败：' + e.message, 'red');
+        console.error(e);
+      }
+    } else {
+      addResult('✗ marked 对象不存在', 'red');
+      addResult('尝试查找其他方式...', 'blue');
+      
+      // 尝试查找其他可能的导出
+      if (typeof window.marked === 'object') {
+        addResult('找到 window.marked', 'green');
+        addResult('window.marked 属性: ' + Object.keys(window.marked).join(', '));
+      }
+    }
+  </script>
+</body>
+</html>

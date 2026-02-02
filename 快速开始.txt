@@ -1,0 +1,158 @@
+🚀 招标代理网站 - 快速开始
+══════════════════════════════
+
+📦 压缩包信息
+━━━━━━━━━━━━━━━━━━━━
+文件：tender-website.tar.gz
+大小：约 150KB
+版本：v3.0（支持 Netlify Functions）
+
+核心功能：
+✅ Netlify Functions - 自动更新文章索引
+✅ 自动部署 - 推送到 GitHub，自动部署
+✅ 响应式设计 - 完美适配移动端
+✅ 百度SEO优化 - 深度优化 TDK
+
+━━━━━━━━━━━━━━━━━━━━
+3步完成部署
+━━━━━━━━━━━━━━━━━━━━
+
+【步骤1】解压文件
+  Linux/Mac: tar -xzf tender-website.tar.gz
+  Windows: 使用 7-Zip 或 WinRAR
+
+【步骤2】部署到 Netlify
+  1. 推送到 GitHub
+  2. 在 Netlify 导入 GitHub 仓库
+  3. 等待部署完成
+
+【步骤3】使用 Functions 自动更新
+  上传新文章到 markdown/ 文件夹
+  推送到 GitHub
+  访问 /api/update-index
+  索引自动更新！
+
+━━━━━━━━━━━━━━━━━━━━
+Functions 功能
+━━━━━━━━━━━━━━━━━━━━
+
+📄 文章索引更新函数
+  端点：/api/update-index
+  方法：GET 或 POST
+  功能：自动扫描 markdown 文件并更新索引
+
+  调用示例：
+  浏览器访问：https://你的网站.netlify.app/api/update-index
+  JavaScript：fetch('/api/update-index').then(r => r.json()).then(console.log)
+
+📧 联系表单处理函数
+  端点：/api/contact
+  方法：POST
+  功能：处理联系表单提交和验证
+
+  调用示例：
+  fetch('/api/contact', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      name: '张三',
+      email: 'zhangsan@example.com',
+      message: '我想咨询...'
+    })
+  }).then(r => r.json()).then(console.log)
+
+━━━━━━━━━━━━━━━━━━━━
+自动更新文章（3种方式）
+━━━━━━━━━━━━━━━━━━━━
+
+方式1：浏览器访问（最简单）
+  1. 上传 .md 文件到 markdown/ 文件夹
+  2. 推送到 GitHub
+  3. 访问 https://你的网站.netlify.app/api/update-index
+  4. 索引自动更新！
+
+方式2：JavaScript 调用
+  fetch('/api/update-index')
+    .then(r => r.json())
+    .then(result => {
+      if (result.success) {
+        alert('更新成功！');
+        location.reload();
+      }
+    });
+
+方式3：GitHub Actions 自动触发（推荐）
+  1. 上传 .md 文件到 markdown/ 文件夹
+  2. 推送到 GitHub
+  3. GitHub Actions 自动运行 generate_index.py
+  4. 索引自动更新！
+
+━━━━━━━━━━━━━━━━━━━━
+文档导航
+━━━━━━━━━━━━━━━━━━━━
+
+完整教程.md ⭐← 从这里开始！
+  完整的部署和使用教程
+  包含所有 Functions 使用方法
+
+QUICKSTART.md
+  5分钟快速开始
+
+NETLIFY_FUNCTIONS_GUIDE.md
+  Functions 详细指南
+
+FUNCTIONS_QUICKREF.md
+  Functions 快速参考
+
+README.md
+  项目完整说明
+
+━━━━━━━━━━━━━━━━━━━━
+验证部署
+━━━━━━━━━━━━━━━━━━━━
+
+部署完成后，检查：
+□ 首页能正常访问
+□ 所有页面链接正常
+□ 文章列表能正常显示
+□ /api/update-index 能正常访问
+□ 上传新文章后能自动更新索引
+□ 联系表单能正常提交
+
+━━━━━━━━━━━━━━━━━━━━
+常见问题
+━━━━━━━━━━━━━━━━━━━━
+
+Q: Functions 返回 404？
+A: 检查 netlify/functions/ 目录是否存在，查看部署日志
+
+Q: 文章索引不更新？
+A: 访问 /api/update-index 检查是否工作，查看环境变量
+
+Q: 表单提交失败？
+A: 检查必填字段，查看浏览器控制台错误
+
+Q: 如何查看 Functions 日志？
+A: 进入 Netlify 控制台 → Functions → 选择函数 → 查看日志
+
+━━━━━━━━━━━━━━━━━━━━
+快速配置
+━━━━━━━━━━━━━━━━━━━━
+
+修改网站信息：
+  编辑 config.js
+  修改 siteName、siteDescription、contact
+  提交到 GitHub，自动更新
+
+配置环境变量（Netlify 控制台）：
+  INDEX_FILE_PATH = markdown/index.json
+  SAVE_FORM_DATA = true
+
+━━━━━━━━━━━━━━━━━━━━
+
+立即开始：查看 "完整教程.md"
+详细指南：查看 NETLIFY_FUNCTIONS_GUIDE.md
+
+━━━━━━━━━━━━━━━━━━━━
+祝使用愉快！🎉
+━━━━━━━━━━━━━━━━━━━━

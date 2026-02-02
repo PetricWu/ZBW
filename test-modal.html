@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>测试文章模态框</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <h1>测试文章模态框</h1>
+  
+  <button onclick="showArticleModal('政府采购法最新修订解读.md')" style="padding: 10px 20px; font-size: 16px;">
+    点击测试文章模态框
+  </button>
+  
+  <button id="testBtn2" style="padding: 10px 20px; font-size: 16px; margin-left: 10px;">
+    使用事件绑定测试
+  </button>
+  
+  <div id="result" style="margin-top: 20px; padding: 10px; background: #f0f0f0;"></div>
+  
+  <!-- 模态框 -->
+  <div class="article-modal" id="articleModal" aria-hidden="true">
+    <div class="article-modal-overlay" id="articleModalOverlay"></div>
+    <div class="article-modal-content">
+      <div class="article-modal-header">
+        <h2 class="article-modal-title" id="articleModalTitle"></h2>
+        <button class="article-modal-close" type="button" id="articleModalClose">关闭</button>
+      </div>
+      <div class="article-modal-body">
+        <div class="article-modal-meta" id="articleModalMeta"></div>
+        <div class="article-modal-text" id="articleModalText"></div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="/config.js"></script>
+  <script src="/js/marked.min.js"></script>
+  <script src="/js/main.js"></script>
+  
+  <script>
+    const resultDiv = document.getElementById('result');
+    
+    function addLog(text) {
+      const p = document.createElement('p');
+      p.textContent = new Date().toLocaleTimeString() + ' - ' + text;
+      resultDiv.appendChild(p);
+      console.log(text);
+    }
+    
+    // 等待脚本加载
+    window.addEventListener('DOMContentLoaded', () => {
+      addLog('页面 DOMContentLoaded 事件触发');
+      
+      // 延迟检查，确保所有脚本都已加载
+      setTimeout(() => {
+        addLog('检查 showArticleModal 函数...');
+        addLog('  typeof showArticleModal = ' + typeof showArticleModal);
+        addLog('  typeof window.showArticleModal = ' + typeof window.showArticleModal);
+        
+        addLog('检查 closeArticleModal 函数...');
+        addLog('  typeof closeArticleModal = ' + typeof closeArticleModal);
+        addLog('  typeof window.closeArticleModal = ' + typeof window.closeArticleModal);
+        
+        addLog('检查 marked 对象...');
+        addLog('  typeof marked = ' + typeof marked);
+        if (typeof marked !== 'undefined') {
+          addLog('  typeof marked.parse = ' + typeof marked.parse);
+          addLog('  marked 属性：' + Object.keys(marked).join(', '));
+        }
+        
+        addLog('检查页面元素...');
+        addLog('  articleModal: ' + (document.getElementById('articleModal') ? '存在' : '不存在'));
+        addLog('  articleModalTitle: ' + (document.getElementById('articleModalTitle') ? '存在' : '不存在'));
+        addLog('  articleModalText: ' + (document.getElementById('articleModalText') ? '存在' : '不存在'));
+        
+        // 尝试手动调用
+        if (typeof showArticleModal === 'function') {
+          addLog('✓ showArticleModal 函数可用，可以测试点击按钮');
+        } else if (typeof window.showArticleModal === 'function') {
+          addLog('✓ window.showArticleModal 函数可用，可以测试点击按钮');
+        } else {
+          addLog('✗ showArticleModal 函数不可用！');
+        }
+      }, 1000);
+    });
+    
+    // 使用事件绑定测试
+    document.getElementById('testBtn2').addEventListener('click', () => {
+      addLog('>>> 通过事件绑定调用 showArticleModal');
+      try {
+        if (typeof showArticleModal === 'function') {
+          showArticleModal('政府采购法最新修订解读.md');
+        } else if (typeof window.showArticleModal === 'function') {
+          window.showArticleModal('政府采购法最新修订解读.md');
+        } else {
+          addLog('错误：showArticleModal 函数不存在');
+        }
+      } catch (e) {
+        addLog('异常：' + e.message);
+        console.error(e);
+      }
+    });
+  </script>
+</body>
+</html>

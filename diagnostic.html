@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>网站诊断工具 - 华诚招标代理</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: #f5f7fa;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      color: #005EA5;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 3px solid #005EA5;
+    }
+
+    h2 {
+      color: #333;
+      margin: 30px 0 15px 0;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #E0E0E0;
+    }
+
+    .status-card {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .status-item {
+      padding: 12px 15px;
+      margin: 10px 0;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .status-item.success {
+      background: #d4edda;
+      border-left: 4px solid #28a745;
+    }
+
+    .status-item.error {
+      background: #f8d7da;
+      border-left: 4px solid #dc3545;
+    }
+
+    .status-item.warning {
+      background: #fff3cd;
+      border-left: 4px solid #ffc107;
+    }
+
+    .status-item .label {
+      font-weight: 600;
+    }
+
+    .status-item .value {
+      color: #666;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .badge.success {
+      background: #28a745;
+      color: white;
+    }
+
+    .badge.error {
+      background: #dc3545;
+      color: white;
+    }
+
+    .badge.warning {
+      background: #ffc107;
+      color: #333;
+    }
+
+    .code-block {
+      background: #2d2d2d;
+      color: #f8f8f2;
+      padding: 15px;
+      border-radius: 4px;
+      overflow-x: auto;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      line-height: 1.5;
+      margin: 10px 0;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 12px 24px;
+      background: #005EA5;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: 600;
+      margin: 10px 10px 10px 0;
+      transition: background 0.3s;
+    }
+
+    .button:hover {
+      background: #004A82;
+    }
+
+    .button.secondary {
+      background: #6c757d;
+    }
+
+    .button.secondary:hover {
+      background: #5a6268;
+    }
+
+    .info-box {
+      background: #e8f4f8;
+      border-left: 4px solid #005EA5;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 4px;
+    }
+
+    .error-log {
+      background: #f8d7da;
+      border: 1px solid #f5c6cb;
+      padding: 15px;
+      border-radius: 4px;
+      margin: 10px 0;
+    }
+
+    .console-output {
+      background: #2d2d2d;
+      color: #f8f8f2;
+      padding: 15px;
+      border-radius: 4px;
+      max-height: 300px;
+      overflow-y: auto;
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+    }
+
+    .step {
+      background: white;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 4px;
+      border-left: 4px solid #005EA5;
+    }
+
+    .step-number {
+      font-weight: 600;
+      color: #005EA5;
+    }
+
+    #loading {
+      text-align: center;
+      padding: 40px;
+      font-size: 18px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔍 网站诊断工具</h1>
+    <p style="color: #666; margin-bottom: 20px;">自动检查网站配置和文件加载状态</p>
+
+    <div id="loading">正在检测中...</div>
+
+    <div id="results" style="display: none;">
+      <h2>📊 检测结果</h2>
+
+      <div class="status-card">
+        <h3>🎨 CSS 文件检测</h3>
+        <div id="css-results"></div>
+      </div>
+
+      <div class="status-card">
+        <h3>🖼️ 图片文件检测</h3>
+        <div id="image-results"></div>
+      </div>
+
+      <div class="status-card">
+        <h3>📄 页面文件检测</h3>
+        <div id="page-results"></div>
+      </div>
+
+      <div class="status-card">
+        <h3>🔗 API 端点检测</h3>
+        <div id="api-results"></div>
+      </div>
+
+      <div class="status-card">
+        <h3>🐛 浏览器控制台错误</h3>
+        <div id="console-errors"></div>
+      </div>
+
+      <h2>🛠️ 修复建议</h2>
+
+      <div id="fix-suggestions"></div>
+
+      <h2>📖 常见问题</h2>
+
+      <div class="info-box">
+        <h3>Q: 界面是乱的怎么办？</h3>
+        <p><strong>A:</strong> 按照以下步骤操作：</p>
+        <div class="step">
+          <span class="step-number">步骤 1:</span> 清除浏览器缓存（Ctrl+Shift+Delete 或 Cmd+Shift+Delete）
+        </div>
+        <div class="step">
+          <span class="step-number">步骤 2:</span> 刷新页面（Ctrl+F5 或 Cmd+Shift+R 强制刷新）
+        </div>
+        <div class="step">
+          <span class="step-number">步骤 3:</span> 检查上面的检测结果，看是否有文件加载失败
+        </div>
+        <div class="step">
+          <span class="step-number">步骤 4:</span> 如果 CSS 文件加载失败，检查 GitHub 仓库中是否存在该文件
+        </div>
+      </div>
+
+      <div class="info-box">
+        <h3>Q: 为什么有些文件显示 404？</h3>
+        <p><strong>A:</strong> 可能的原因：</p>
+        <ul style="margin-left: 20px; margin-top: 10px;">
+          <li>文件未上传到 GitHub 仓库</li>
+          <li>文件路径拼写错误</li>
+          <li>文件名大小写不匹配（Linux 区分大小写）</li>
+          <li>Netlify 部署时文件遗漏</li>
+        </ul>
+      </div>
+
+      <h2>🚀 快速操作</h2>
+      <a href="/" class="button">返回首页</a>
+      <a href="/about.html" class="button">关于我们</a>
+      <a href="/articles.html" class="button">文章列表</a>
+      <button onclick="window.location.reload()" class="button secondary">重新检测</button>
+    </div>
+  </div>
+
+  <script>
+    const cssFiles = [
+      '/css/style.css',
+      '/css/home-banner.css',
+      '/css/banner-handmade.css',
+      '/css/cases-handmade.css',
+      '/css/sections-handmade.css',
+      '/css/success-cases.css',
+      '/css/testimonials.css',
+      '/css/faq.css',
+      '/css/certificates.css',
+      '/css/team.css',
+      '/css/consultation.css',
+      '/css/handmade-style.css'
+    ];
+
+    const imageFiles = [
+      '/images/logo.png',
+      '/images/favicon.png',
+      '/images/apple-touch-icon.png',
+      '/assets/image.png'
+    ];
+
+    const pageFiles = [
+      '/',
+      '/about.html',
+      '/articles.html',
+      '/contact.html',
+      '/post.html'
+    ];
+
+    const apiEndpoints = [
+      '/api/update-index',
+      '/api/contact'
+    ];
+
+    async function checkFile(url) {
+      try {
+        const response = await fetch(url, { method: 'HEAD' });
+        return {
+          url,
+          success: response.ok,
+          status: response.status
+        };
+      } catch (error) {
+        return {
+          url,
+          success: false,
+          status: 'Error',
+          error: error.message
+        };
+      }
+    }
+
+    async function runChecks() {
+      const results = {
+        css: [],
+        images: [],
+        pages: [],
+        apis: []
+      };
+
+      // 检查 CSS 文件
+      for (const file of cssFiles) {
+        const result = await checkFile(file);
+        results.css.push(result);
+      }
+
+      // 检查图片文件
+      for (const file of imageFiles) {
+        const result = await checkFile(file);
+        results.images.push(result);
+      }
+
+      // 检查页面文件
+      for (const file of pageFiles) {
+        const result = await checkFile(file);
+        results.pages.push(result);
+      }
+
+      // 检查 API 端点
+      for (const file of apiEndpoints) {
+        const result = await checkFile(file);
+        results.apis.push(result);
+      }
+
+      return results;
+    }
+
+    function renderStatusItem(result) {
+      const className = result.success ? 'success' : 'error';
+      const badgeClass = result.success ? 'success' : 'error';
+      const badgeText = result.success ? '✓ 正常' : '✗ 失败';
+
+      return `
+        <div class="status-item ${className}">
+          <span class="label">${result.url}</span>
+          <span class="badge ${badgeClass}">${badgeText} (${result.status})</span>
+        </div>
+      `;
+    }
+
+    function renderResults(results) {
+      // 渲染 CSS 结果
+      document.getElementById('css-results').innerHTML =
+        results.css.map(renderStatusItem).join('');
+
+      // 渲染图片结果
+      document.getElementById('image-results').innerHTML =
+        results.images.map(renderStatusItem).join('');
+
+      // 渲染页面结果
+      document.getElementById('page-results').innerHTML =
+        results.pages.map(renderStatusItem).join('');
+
+      // 渲染 API 结果
+      document.getElementById('api-results').innerHTML =
+        results.apis.map(renderStatusItem).join('');
+
+      // 捕获控制台错误
+      const consoleErrors = [];
+      const originalError = console.error;
+      console.error = function(...args) {
+        consoleErrors.push(args.join(' '));
+        originalError.apply(console, args);
+      };
+
+      setTimeout(() => {
+        console.error = originalError;
+
+        if (consoleErrors.length > 0) {
+          document.getElementById('console-errors').innerHTML = `
+            <div class="error-log">
+              <h4>发现 ${consoleErrors.length} 个错误：</h4>
+              <div class="console-output">${consoleErrors.join('\n')}</div>
+            </div>
+          `;
+        } else {
+          document.getElementById('console-errors').innerHTML = `
+            <div class="status-item success">
+              <span class="label">未发现控制台错误</span>
+              <span class="badge success">✓ 正常</span>
+            </div>
+          `;
+        }
+      }, 100);
+
+      // 生成修复建议
+      const failedFiles = [
+        ...results.css.filter(r => !r.success),
+        ...results.images.filter(r => !r.success),
+        ...results.pages.filter(r => !r.success)
+      ];
+
+      if (failedFiles.length > 0) {
+        document.getElementById('fix-suggestions').innerHTML = `
+          <div class="error-log">
+            <h4>⚠️ 发现 ${failedFiles.length} 个文件加载失败！</h4>
+            <p>请按照以下步骤修复：</p>
+            <div class="step">
+              <span class="step-number">步骤 1:</span> 检查 GitHub 仓库，确保以下文件存在：
+              <div class="code-block">${failedFiles.map(f => f.url).join('\n')}</div>
+            </div>
+            <div class="step">
+              <span class="step-number">步骤 2:</span> 如果文件不存在，从压缩包中重新上传
+            </div>
+            <div class="step">
+              <span class="step-number">步骤 3:</span> 提交更改到 GitHub
+            </div>
+            <div class="step">
+              <span class="step-number">步骤 4:</span> 等待 Netlify 自动重新部署
+            </div>
+            <div class="step">
+              <span class="step-number">步骤 5:</span> 清除浏览器缓存，重新访问网站
+            </div>
+          </div>
+        `;
+      } else {
+        document.getElementById('fix-suggestions').innerHTML = `
+          <div class="status-item success">
+            <span class="label">所有文件加载正常！</span>
+            <span class="badge success">✓ 无需修复</span>
+          </div>
+          <div class="info-box">
+            <h4>💡 提示</h4>
+            <p>如果界面仍然显示异常，请尝试：</p>
+            <ul style="margin-left: 20px; margin-top: 10px;">
+              <li>清除浏览器缓存</li>
+              <li>使用无痕/隐私模式访问</li>
+              <li>尝试其他浏览器</li>
+            </ul>
+          </div>
+        `;
+      }
+    }
+
+    // 运行检查
+    async function init() {
+      const results = await runChecks();
+
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('results').style.display = 'block';
+
+      renderResults(results);
+    }
+
+    init();
+  </script>
+</body>
+</html>
